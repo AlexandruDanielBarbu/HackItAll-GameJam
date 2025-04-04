@@ -785,6 +785,7 @@ GameObject:
   - component: {fileID: 1438055302}
   - component: {fileID: 1438055301}
   - component: {fileID: 1438055303}
+  - component: {fileID: 1438055304}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -871,6 +872,25 @@ MonoBehaviour:
   button2Text: {fileID: 763282791}
   timerText: {fileID: 1544206863}
   audioSource: {fileID: 156508649}
+  timerComponent: {fileID: 1438055304}
+  decisionManager: {fileID: 1652984987}
+--- !u!114 &1438055304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438055299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2872e351f82e9a64bbd7a62603398304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText: {fileID: 1544206863}
+  countdownTime: 10
+  onTimerFinished:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1544206860
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,7 +902,6 @@ GameObject:
   - component: {fileID: 1544206861}
   - component: {fileID: 1544206864}
   - component: {fileID: 1544206863}
-  - component: {fileID: 1544206862}
   m_Layer: 5
   m_Name: timer
   m_TagString: Untagged
@@ -909,20 +928,6 @@ RectTransform:
   m_AnchoredPosition: {x: 10, y: -10}
   m_SizeDelta: {x: 124.831055, y: 49.9594}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &1544206862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1544206860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2872e351f82e9a64bbd7a62603398304, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerText: {fileID: 1544206863}
-  countdownTime: 10
 --- !u!114 &1544206863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1221,7 +1226,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelController: {fileID: 1438055303}
-  decisions: []
+  decisions:
+  - button1Text: La stanga
+    button2Text: La dreapta
+    clickSoundButton1: {fileID: 8300000, guid: 48ac5e1924b8a0d44910c0c1857b8083, type: 3}
+    clickSoundButton2: {fileID: 8300000, guid: ddbef0e8a96ddba42a974e42c97403cd, type: 3}
+    timerDuration: 10
+  - button1Text: In fata
+    button2Text: In spate
+    clickSoundButton1: {fileID: 8300000, guid: 48ac5e1924b8a0d44910c0c1857b8083, type: 3}
+    clickSoundButton2: {fileID: 8300000, guid: ddbef0e8a96ddba42a974e42c97403cd, type: 3}
+    timerDuration: 20
 --- !u!1 &1660674174
 GameObject:
   m_ObjectHideFlags: 0
