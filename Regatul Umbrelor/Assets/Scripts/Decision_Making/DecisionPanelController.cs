@@ -7,16 +7,17 @@ public class DecisionPanelController : MonoBehaviour
     // Referințe la componentele UI din panel
     public Button button1;
     public Button button2;
-    public TextMeshProUGUI button1Text; // Dacă folosești TextMeshPro, folosește TextMeshProUGUI
+    public TextMeshProUGUI button1Text;
     public TextMeshProUGUI button2Text;
-    public TextMeshProUGUI timerText;    // Pentru a afișa timerul, dacă ai
+    public TextMeshProUGUI timerText;
     public AudioSource audioSource;
 
-    // Variabile pentru timer
-    private float timer;
-    private bool timerRunning = false;
+    // Referință la componenta Timer existentă
+    public Assets.Scripts.Timer timerComponent;
 
-    // Metodă de configurare ce primește datele unei decizii
+    // Referință opțională la managerul de decizii
+    public DecisionManager decisionManager;
+
     public void SetupDecision(DecisionData decisionData)
     {
         // Setează textele butoanelor
@@ -32,6 +33,10 @@ public class DecisionPanelController : MonoBehaviour
             Debug.Log("Ai apăsat primul buton");
             if (audioSource != null && decisionData.clickSoundButton1 != null)
                 audioSource.PlayOneShot(decisionData.clickSoundButton1);
+
+            // Trecem la următoarea decizie
+            if (decisionManager != null)
+                decisionManager.NextDecision();
         });
 
         button2.onClick.AddListener(() =>
@@ -41,36 +46,23 @@ public class DecisionPanelController : MonoBehaviour
                 audioSource.PlayOneShot(decisionData.clickSoundButton2);
         });
 
-        // Configurează timerul
-        timer = decisionData.timerDuration;
-        timerRunning = true;
-        UpdateTimerUI();
-    }
-
-    void Update()
-    {
-        if (timerRunning)
+        // Configurează și resetează Timer-ul existent
+        if (timerComponent != null)
         {
-            timer -= Time.deltaTime;
-            if (timer <= 0)
+            // Setează referința la Text-ul timerului
+            timerComponent.timerText = timerText;
+
+            // Resetează timerul la durata specificată în decizie
+            timerComponent.ResetTimer(decisionData.timerDuration);
+
+            // Elimină evenimentele anterioare și abonează o metodă nouă pentru evenimentul când timer-ul se termină
+            timerComponent.onTimerFinished.RemoveAllListeners();
+            timerComponent.onTimerFinished.AddListener(() =>
             {
-                timer = 0;
-                timerRunning = false;
-                Debug.Log("Timer-ul s-a oprit!");
-                // Aici poți declanșa o acțiune când timer-ul s-a terminat.
-            }
-            UpdateTimerUI();
-        }
-    }
-
-    // Metodă pentru actualizarea textului timerului
-    void UpdateTimerUI()
-    {
-        if (timerText != null)
-        {
-            int minutes = Mathf.FloorToInt(timer / 60);
-            int seconds = Mathf.FloorToInt(timer % 60);
-            timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+                Debug.Log("Timer-ul a finalizat, trecem la următoarea decizie");
+                if (decisionManager != null)
+                    decisionManager.NextDecision();
+            });
         }
     }
 }

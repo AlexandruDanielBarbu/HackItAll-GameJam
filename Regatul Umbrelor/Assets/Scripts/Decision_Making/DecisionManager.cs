@@ -14,11 +14,10 @@ public class DecisionManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Nu sunt decizii setate în DecisionManager!");
+            Debug.LogError("Nu sunt decizii setate!");
         }
     }
 
-    // Apelată, de exemplu, după ce s-a luat o decizie sau la un anumit eveniment
     public void NextDecision()
     {
         currentDecisionIndex++;

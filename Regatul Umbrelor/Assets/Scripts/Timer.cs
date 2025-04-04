@@ -1,15 +1,17 @@
-﻿using System.Collections;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
+using TMPro;
+using UnityEngine.Events;
 
 namespace Assets.Scripts
 {
     public class Timer : MonoBehaviour
     {
-
-        public TMPro.TextMeshProUGUI timerText;
+        public TextMeshProUGUI timerText;
         public float countdownTime = 10f;
         bool timerRunning = true;
+
+        // Eveniment invocat când timerul ajunge la 0
+        public UnityEvent onTimerFinished;
 
         void Update()
         {
@@ -21,14 +23,34 @@ namespace Assets.Scripts
                 {
                     countdownTime = 0f;
                     timerRunning = false;
-                    timerText.text = "0";
-                    Debug.Log("Countdown-ul s-a oprit!");
+
+                    if (timerText != null)
+                        timerText.text = "0";
+
+                    Debug.Log("Timer-ul a ajuns la 0!");
+                    if (onTimerFinished != null)
+                        onTimerFinished.Invoke();
                 }
                 else
                 {
                     int seconds = Mathf.FloorToInt(countdownTime % 60f);
-                    timerText.text = string.Format("{0}", seconds);
+                    if (timerText != null)
+                        timerText.text = seconds.ToString();
                 }
+            }
+        }
+
+        public void ResetTimer(float newTime)
+        {
+            Debug.Log("ResetTimer apelat cu newTime = " + newTime);
+            countdownTime = newTime;
+            timerRunning = true;
+
+            // Actualizează imediat textul, dacă vrei
+            if (timerText != null)
+            {
+                int seconds = Mathf.FloorToInt(countdownTime % 60f);
+                timerText.text = seconds.ToString();
             }
         }
     }
