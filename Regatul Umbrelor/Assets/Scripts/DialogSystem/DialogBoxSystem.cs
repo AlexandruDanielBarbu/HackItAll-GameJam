@@ -70,11 +70,13 @@ public class DialogBoxSystem : MonoBehaviour
             if (currentDialog.lines[dialogLineIndex].speaker == DialogLine.Speaker.Player)
             {
                 playerText.text = currentDialog.lines[dialogLineIndex].text;
+                npcText.text = string.Empty;
                 dialogLineIndex++;
             }
             else
             {
                 npcText.text = currentDialog.lines[dialogLineIndex].text;
+                playerText.text = string.Empty;
                 dialogLineIndex++;
             }
 
