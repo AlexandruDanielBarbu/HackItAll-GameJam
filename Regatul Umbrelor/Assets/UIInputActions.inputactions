@@ -58,7 +58,6 @@
                 },
                 {
                     "name": "",
-
                     "id": "3ca8f77c-c0e0-455e-8f58-5510ff813ff5",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -150,13 +149,11 @@
                     "id": "6515791b-4085-47ca-af8d-4f6d66e027af",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
-
                     "processors": "StickDeadzone(min=0.4)",
                     "groups": "",
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": false
-
                 },
                 {
                     "name": "2D Vector keyboard",
