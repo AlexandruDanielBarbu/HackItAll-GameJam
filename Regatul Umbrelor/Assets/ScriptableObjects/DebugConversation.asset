@@ -26,6 +26,6 @@ MonoBehaviour:
     text: What should we do?
     choices:
     - choiceText: Help school?
-      nextDialog: {fileID: 0}
+      nextDialog: {fileID: 11400000, guid: e84948d909b51e4489e084a94d795afe, type: 2}
     - choiceText: Help with the crops?
-      nextDialog: {fileID: 0}
+      nextDialog: {fileID: 11400000, guid: 5e53c3eadc538514db3230f0207e73e4, type: 2}

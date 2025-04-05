@@ -63,10 +63,25 @@ public class DialogBoxSystem : MonoBehaviour
     //}
 
     bool isTalking = true;
+    [SerializeField] TMP_Text option1_choice;
+    [SerializeField] TMP_Text option2_choice;
+
+    public void SetDialog(DialogDataSO dialog)
+    {
+        dialogLineIndex = 0;
+        currentDialog = dialog;
+    }
     private void Update()
     {
         if (isTalking && Input.GetKeyDown(KeyCode.Mouse0))
         {
+            if (currentDialog.lines[dialogLineIndex].choices.Count > 0 &&
+                currentDialog.lines[dialogLineIndex].speaker == DialogLine.Speaker.NPC) 
+            {
+                option1_choice.text = currentDialog.lines[dialogLineIndex].choices[0].choiceText;
+                option2_choice.text = currentDialog.lines[dialogLineIndex].choices[1].choiceText;
+            }
+
             if (currentDialog.lines[dialogLineIndex].speaker == DialogLine.Speaker.Player)
             {
                 playerText.text = currentDialog.lines[dialogLineIndex].text;
