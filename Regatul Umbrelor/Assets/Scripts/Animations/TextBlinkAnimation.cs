@@ -1,28 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TextBlinkAnimation : MonoBehaviour
 {
-    [SerializeField] float timeBetweenBlinks = 1f;
+    [SerializeField] private float timeBetweenBlinks = 1f;
 
-    float timer;
+    private float timer;
+    private TMP_Text tmpText;
+    private bool isVisible = true;
 
     private void Awake()
     {
+        tmpText = GetComponent<TMP_Text>();
         timer = timeBetweenBlinks;
-        gameObject.SetActive(true);
+        SetAlpha(1f);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         timer -= Time.deltaTime;
-        Debug.Log(timer);
-        if (timer < 0)
+
+        if (timer <= 0f)
         {
             timer = timeBetweenBlinks;
-            gameObject.SetActive(!gameObject.activeSelf);
+            isVisible = !isVisible;
+            SetAlpha(isVisible ? 1f : 0f);
+        }
+    }
+
+    private void SetAlpha(float alpha)
+    {
+        if (tmpText != null)
+        {
+            Color color = tmpText.color;
+            color.a = alpha;
+            tmpText.color = color;
         }
     }
 }
