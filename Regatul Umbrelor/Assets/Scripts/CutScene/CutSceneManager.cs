@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CutSceneManager : MonoBehaviour
 {
+    [SerializeField] int cutSceneId;
     [SerializeField] private GameObject fogOfWar;
     [SerializeField] private Vector3[] positions;
     private int positionIndex = 0;
@@ -29,7 +30,16 @@ public class CutSceneManager : MonoBehaviour
             }
         } else if (Input.GetKeyDown(KeyCode.Mouse0) && atTheEnd)
         {
-            SceneLoading.Instance.TransitionToScene("AlexDevNextScene");
+            if (cutSceneId == 0)
+            {
+                /*Load gameplay scene*/
+                SceneLoading.Instance.TransitionToScene("AlexDevNextScene");
+            }
+
+            if (cutSceneId == 1)
+            {
+                /*Load credit scene*/
+            }
         }
     }
 }
