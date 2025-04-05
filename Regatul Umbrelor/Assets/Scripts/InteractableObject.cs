@@ -6,6 +6,7 @@ using TMPro;
 
 public class InteractableObject : MonoBehaviour
 {
+    [SerializeField] private string sceneToLoad;
     public GameObject interactText;
     private TextMeshProUGUI tmpText;
     private bool isPlayerNear = false;
@@ -83,8 +84,12 @@ public class InteractableObject : MonoBehaviour
 
     void Interact()
     {
-        Debug.Log("Ai interacționat cu obiectul!");
-        // Load the scene directly
-        SceneManager.LoadScene("CutSceneBegin");
+        StartCoroutine(LoadSceneAfterDelay(0.5f));
+    }
+
+    private IEnumerator LoadSceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(sceneToLoad);
     }
 }

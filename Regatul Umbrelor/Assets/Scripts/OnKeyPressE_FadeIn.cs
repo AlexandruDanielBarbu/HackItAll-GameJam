@@ -1,18 +1,16 @@
 using System.Collections;
 using UnityEngine;
 
-public class FadeOtherObject : MonoBehaviour
+public class FadeIn_OnInteraction : MonoBehaviour
 {
-    // This script attaches to object A.
-    // When touched by the player, it fades object B to opaque.
-
-    // Note: Object A should start opaque
-
-    // Object B
     [SerializeField] private GameObject objectToFade;
-    [SerializeField] private float fadeDuration = 1f;
+    private float fadeDuration = 0.5f;
+    private bool isPlayerNearby = false;
     private SpriteRenderer objectRenderer;
     private Color originalColor;
+
+    private bool isPlayerNear = false;
+    private bool hasFadedIn = false;
 
     private void Start()
     {
@@ -24,11 +22,28 @@ public class FadeOtherObject : MonoBehaviour
         objectRenderer.color = transparentColor;
     }
 
+    private void Update()
+    {
+        if (isPlayerNearby && !hasFadedIn && Input.GetKeyDown(KeyCode.E))
+        {
+            StartCoroutine(FadeToOpaque());
+            hasFadedIn = true;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(FadeToOpaque());
+            isPlayerNearby = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerNearby = false;
         }
     }
 

@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AlexScenes/CutSceneBegin.unity
     guid: f6ab3f7c9bbfd5c46aba9429af5da077
+  - enabled: 1
+    path: Assets/Scenes/GeorgeScenes/ConferenceHall01.unity
+    guid: edb4d3e1dd5e98f46ab0fb3fc794093c
+  - enabled: 1
+    path: Assets/Scenes/GeorgeScenes/Hallway01.unity
+    guid: ba6adf26dca2f0448889735ce014de6d
   m_configObjects: {}
