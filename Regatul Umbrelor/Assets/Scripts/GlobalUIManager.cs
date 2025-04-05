@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class GlobalUIManager : MonoBehaviour
 {
@@ -23,17 +24,6 @@ public class GlobalUIManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.JoystickButton1))
-        {
-            if (optionsCanvas.activeSelf)
-            {
-                CloseOptions();
-            }
-        }
-    }
-
     // Call this method from any menu button to open the global options.
     public void OpenOptions()
     {
@@ -41,7 +31,7 @@ public class GlobalUIManager : MonoBehaviour
         {
             optionsCanvas.SetActive(true);
             // Optional: clear the current selection for controller nav
-            EventSystem.current.SetSelectedGameObject(null);
+            // EventSystem.current.SetSelectedGameObject(null);
             // If you have a default button in the Options_panel:
             // EventSystem.current.SetSelectedGameObject(defaultButton);
         }
@@ -51,6 +41,9 @@ public class GlobalUIManager : MonoBehaviour
     public void CloseOptions()
     {
         if (optionsCanvas != null)
+        {
             optionsCanvas.SetActive(false);
+        }
+        SceneManager.UnloadSceneAsync("Options_Global");
     }   
 }
