@@ -1,17 +1,20 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class UIControllerSetup : MonoBehaviour
 {
-    [SerializeField] private Button firstButton;
+    // Drag your default button from the Hierarchy to this field in the Inspector.
+    public GameObject firstSelectedButton;
 
     void Start()
     {
-        // Check if a button is assigned and select it
-        if (firstButton != null)
+        if (firstSelectedButton != null)
         {
-            EventSystem.current.SetSelectedGameObject(firstButton.gameObject);
+            EventSystem.current.SetSelectedGameObject(firstSelectedButton);
+        }
+        else
+        {
+            Debug.LogError("First Selected Button is not assigned!");
         }
     }
 }
