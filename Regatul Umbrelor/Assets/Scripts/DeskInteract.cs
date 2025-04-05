@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro; // Necesită TextMeshPro
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class InteractableObject : MonoBehaviour
 {
@@ -45,6 +44,7 @@ public class InteractableObject : MonoBehaviour
     void Interact()
     {
         Debug.Log("Ai interacționat cu obiectul!");
+        // Load the scene directly
+        SceneManager.LoadScene("CutSceneBegin");
     }
 }
-
