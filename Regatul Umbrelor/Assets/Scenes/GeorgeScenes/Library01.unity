@@ -453,6 +453,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8135971530499722121, guid: 24b0bb67d21171a4aa5a273b9e8c3fe9, type: 3}
   m_PrefabInstance: {fileID: 7331422690873976924}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &776626547 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4111439948526415026, guid: 24b0bb67d21171a4aa5a273b9e8c3fe9, type: 3}
+  m_PrefabInstance: {fileID: 7331422690873976924}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &776626548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,6 +475,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
+  animator: {fileID: 776626547}
 --- !u!61 &776626549
 BoxCollider2D:
   m_ObjectHideFlags: 0
