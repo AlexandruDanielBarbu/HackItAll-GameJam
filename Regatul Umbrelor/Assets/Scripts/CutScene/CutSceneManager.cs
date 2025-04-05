@@ -12,20 +12,24 @@ public class CutSceneManager : MonoBehaviour
         fogOfWar.transform.position = positions[0];
         positionIndex++;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    private bool atTheEnd = false;
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !atTheEnd)
         {
             fogOfWar.transform.position = positions[positionIndex];
             positionIndex++;
-            positionIndex %= positions.Length; 
+
+            positionIndex %= positions.Length;
+
+            if (positionIndex == 0)
+            {
+                atTheEnd = true;
+            }
+        } else if (Input.GetKeyDown(KeyCode.Mouse0) && atTheEnd)
+        {
+            SceneLoading.Instance.TransitionToScene("AlexDevNextScene");
         }
     }
 }
