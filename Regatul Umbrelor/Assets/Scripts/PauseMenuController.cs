@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuController : MonoBehaviour
 {
@@ -6,12 +8,12 @@ public class PauseMenuController : MonoBehaviour
 
     [Tooltip("Assign your Pause Menu UI panel here.")]
     public GameObject pauseMenuUI;
+    public GameObject mainMenuPanel;
+    public GameObject defaultMainButton;
+    public GameObject defaultPauseButton;
+    public GameObject defaultOptionsButton;
 
-    [Tooltip("Assign your Options Panel GameObject here.")]
-    public GameObject optionsPanel;
-
-    [Tooltip("Assign the main UI background that should be hidden when showing options.")]
-    public GameObject mainCanvasBackground;
+    public GameObject optionsCanvas;
 
     public bool pausingEnabled = true;
     private bool isPaused = false;
@@ -39,7 +41,9 @@ public class PauseMenuController : MonoBehaviour
             if (isPaused)
                 ResumeGame();
             else
+            {
                 PauseGame();
+            }
         }
     }
 
@@ -48,10 +52,13 @@ public class PauseMenuController : MonoBehaviour
         if (!pausingEnabled)
             return;
 
-        if (pauseMenuUI != null)
-            pauseMenuUI.SetActive(true);
-        if (mainCanvasBackground != null)
-            mainCanvasBackground.SetActive(false);
+        pauseMenuUI.SetActive(true);
+
+        pauseMenuUI.SetActive(true);
+        if (EventSystem.current != null && defaultPauseButton != null)
+        {
+            EventSystem.current.SetSelectedGameObject(defaultPauseButton);
+        }
 
         Time.timeScale = 0f;
         isPaused = true;
@@ -59,32 +66,51 @@ public class PauseMenuController : MonoBehaviour
 
     public void ResumeGame()
     {
-        if (pauseMenuUI != null)
-            pauseMenuUI.SetActive(false);
-        if (mainCanvasBackground != null)
-            mainCanvasBackground.SetActive(true);
+        pauseMenuUI.SetActive(false);
+
+        if (EventSystem.current != null && defaultMainButton != null)
+        {
+            EventSystem.current.SetSelectedGameObject(defaultMainButton);
+        }
 
         Time.timeScale = 1f;
         isPaused = false;
     }
 
-    public void OpenOptionsPanel()
+    public void OpenOptionsPanel(bool comingFromPause)
     {
-        if (pauseMenuUI != null)
-            pauseMenuUI.SetActive(false);
-        if (mainCanvasBackground != null)
-            mainCanvasBackground.SetActive(false);
-        if (optionsPanel != null)
-            optionsPanel.SetActive(true);
+        if (!comingFromPause)
+            mainMenuPanel.SetActive(false);
+        optionsCanvas.SetActive(true);
+        if (EventSystem.current != null && defaultOptionsButton != null)
+        {
+            EventSystem.current.SetSelectedGameObject(defaultOptionsButton);
+        }
     }
 
     public void CloseOptionsPanel()
     {
-        if (optionsPanel != null)
-            optionsPanel.SetActive(false);
-        if (mainCanvasBackground != null)
-            mainCanvasBackground.SetActive(true);
-        if (pauseMenuUI != null)
+        if (optionsCanvas != null)
+        {
+            optionsCanvas.SetActive(false);
+        }
+
+        if (isPaused)
+        {
             pauseMenuUI.SetActive(true);
+            if (EventSystem.current != null && defaultPauseButton != null)
+            {
+                EventSystem.current.SetSelectedGameObject(defaultPauseButton);
+            }
+        }
+        else
+        {
+            mainMenuPanel.SetActive(true);
+            // Set the default selected button (replace "defaultButton" with your actual button reference)
+            if (EventSystem.current != null && defaultMainButton != null)
+            {
+                EventSystem.current.SetSelectedGameObject(defaultMainButton);
+            }
+        }
     }
 }

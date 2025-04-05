@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -6,8 +8,7 @@ public class MainMenuController : MonoBehaviour
     public GameObject[] panels;
     public GameObject mainMenuPanel;
     public GameObject mainCanvasBackground;
-    public GameObject optionsPanel;
-
+    public GameObject defaultOptionsButton;
 
     // This method will activate the panel at the given index and disable all others.
     public void ShowPanel(int index)
@@ -18,6 +19,14 @@ public class MainMenuController : MonoBehaviour
             panels[i].SetActive(i == index);
         }
         mainMenuPanel.SetActive(false);
+
+        if (index == 1)
+        {
+            if (EventSystem.current != null && defaultOptionsButton != null)
+            {
+                EventSystem.current.SetSelectedGameObject(defaultOptionsButton);
+            }
+        }
     }
 
     public void QuitGame()
@@ -38,12 +47,5 @@ public class MainMenuController : MonoBehaviour
             panel.SetActive(false);
         }
         mainMenuPanel.SetActive(true);
-    }
-
-    public void OpenOptionsPanel()
-    {
-        mainMenuPanel.SetActive(false);
-        mainCanvasBackground.SetActive(false);
-        optionsPanel.SetActive(true);
     }
 }
