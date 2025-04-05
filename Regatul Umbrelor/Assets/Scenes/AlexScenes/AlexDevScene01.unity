@@ -752,6 +752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0c51293caecdd40ae8284434a24ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cutSceneId: 0
   fogOfWar: {fileID: 810559381}
   positions:
   - {x: 0, y: 0, z: 0}
@@ -778,8 +779,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1375741560}
+  - {fileID: 1752114452}
   - {fileID: 517897326}
   - {fileID: 810559383}
-  - {fileID: 1752114452}
   - {fileID: 757575521}
   - {fileID: 138912772}
