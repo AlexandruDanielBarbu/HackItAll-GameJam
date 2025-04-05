@@ -5,6 +5,8 @@ public class MainMenuController : MonoBehaviour
     // Drag your panels from the Hierarchy into this array in the Inspector.
     public GameObject[] panels;
     public GameObject mainMenuPanel;
+    public GameObject mainCanvasBackground;
+    public GameObject optionsPanel;
 
 
     // This method will activate the panel at the given index and disable all others.
@@ -36,5 +38,12 @@ public class MainMenuController : MonoBehaviour
             panel.SetActive(false);
         }
         mainMenuPanel.SetActive(true);
+    }
+
+    public void OpenOptionsPanel()
+    {
+        mainMenuPanel.SetActive(false);
+        mainCanvasBackground.SetActive(false);
+        optionsPanel.SetActive(true);
     }
 }
