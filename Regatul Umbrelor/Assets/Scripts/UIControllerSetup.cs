@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-
 public class UIControllerSetup : MonoBehaviour
 {
     // Drag your default button from the Hierarchy to this field in the Inspector.
