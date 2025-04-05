@@ -7,13 +7,15 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     private bool facingRight = true;
     private float gravityScale = 3f;
-    private float moveSpeed = 8f;
     private float jumpForce = 12f;
+    [SerializeField] private float moveSpeed = 8f;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Animator animator;
+    [SerializeField] private bool animationsEnabled = true;
     private bool isRunning;
+
 
     void Start()
     {
@@ -25,25 +27,28 @@ public class PlayerMovement : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         bool grounded = IsGrounded();
 
-        if (Input.GetButtonDown("Jump") && grounded)
+        if (animationsEnabled)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        }
+            if (Input.GetButtonDown("Jump") && grounded && animationsEnabled)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            }
 
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.8f);
-        }
+            if (Input.GetButtonUp("Jump") && rb.velocity.y > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.8f);
+            }
 
-        animator.SetBool("IsRunning", grounded && (rb.velocity.x != 0));
+            animator.SetBool("IsRunning", grounded && (rb.velocity.x != 0));
 
-        if (rb.velocity.y > 0)  // jump
-        {
-            animator.SetBool("IsJumping", true);
-        }
-        else if (grounded) // on ground
-        {
-            animator.SetBool("IsJumping", false);
+            if (rb.velocity.y > 0)  // jump
+            {
+                animator.SetBool("IsJumping", true);
+            }
+            else if (grounded) // on ground
+            {
+                animator.SetBool("IsJumping", false);
+            }
         }
 
         Flip();
