@@ -1,17 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro; // Necesită TextMeshPro
+using TMPro;
 
 public class InteractableObject : MonoBehaviour
 {
     public GameObject interactText;
+    private TextMeshProUGUI tmpText;
     private bool isPlayerNear = false;
+    private Coroutine fadeCoroutine;
+
+    public float fadeDuration = 0.5f;
 
     void Start()
     {
         if (interactText != null)
+        {
+            tmpText = interactText.GetComponent<TextMeshProUGUI>();
+            if (tmpText != null)
+            {
+                Color c = tmpText.color;
+                c.a = 0f;
+                tmpText.color = c;
+            }
+
             interactText.SetActive(false);
+        }
     }
 
     void Update()
@@ -28,7 +42,11 @@ public class InteractableObject : MonoBehaviour
         {
             isPlayerNear = true;
             if (interactText != null)
+            {
                 interactText.SetActive(true);
+                if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
+                fadeCoroutine = StartCoroutine(FadeTextToAlpha(1f));
+            }
         }
     }
 
@@ -37,9 +55,29 @@ public class InteractableObject : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNear = false;
-            if (interactText != null)
-                interactText.SetActive(false);
+            if (interactText != null && tmpText != null)
+            {
+                if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
+                fadeCoroutine = StartCoroutine(FadeTextToAlpha(0f, () => interactText.SetActive(false)));
+            }
         }
+    }
+
+    IEnumerator FadeTextToAlpha(float targetAlpha, System.Action onComplete = null)
+    {
+        float startAlpha = tmpText.color.a;
+        float time = 0f;
+
+        while (time < fadeDuration)
+        {
+            time += Time.deltaTime;
+            float alpha = Mathf.Lerp(startAlpha, targetAlpha, time / fadeDuration);
+            tmpText.color = new Color(tmpText.color.r, tmpText.color.g, tmpText.color.b, alpha);
+            yield return null;
+        }
+
+        tmpText.color = new Color(tmpText.color.r, tmpText.color.g, tmpText.color.b, targetAlpha);
+        onComplete?.Invoke();
     }
 
     void Interact()
@@ -47,4 +85,3 @@ public class InteractableObject : MonoBehaviour
         Debug.Log("Ai interacționat cu obiectul!");
     }
 }
-
