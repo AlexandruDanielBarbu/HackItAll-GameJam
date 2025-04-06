@@ -4,5 +4,5 @@ using UnityEngine;
 
 public static class Decisions
 {
-    public static bool savedSchool = true;
+    public static bool savedSchool = false;
 }

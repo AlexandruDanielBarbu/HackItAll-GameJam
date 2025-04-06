@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class DialogBoxSystem : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class DialogBoxSystem : MonoBehaviour
                      private float timer;
     
     [SerializeField] TMP_Text countdown;
+    [SerializeField] GameObject fadeTrigger;
 
     [Header("Choice Object")]
     [SerializeField] GameObject choicesPanel;
@@ -111,10 +113,18 @@ public class DialogBoxSystem : MonoBehaviour
                     {
                         dialogLineIndex++;
                     }
-            } else
+            }
+            else
             {
-                Debug.Log("MA-TA");
+                fadeTrigger.SetActive(true);
+                StartCoroutine(LoadSceneAfterDelay("BeforeBattle01", 1f));
             }
         }
+    }
+
+    private IEnumerator LoadSceneAfterDelay(string sceneName, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(sceneName);
     }
 }

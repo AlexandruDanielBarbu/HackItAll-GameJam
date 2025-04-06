@@ -229,7 +229,7 @@ public class BattleManager : MonoBehaviour
                         Debug.Log("Player was left for dead!");
                         childWildcard.SetActive(false);
                         gameOverScreen.SetActive(true);
-                        gameOverTextHint.text = "The child refused to help a king that does not value a school. Many were wounded and some died in the school flod...";
+                        gameOverTextHint.text = "The child refused to help a king that does not value a school. Many were wounded and some died in the school flood...";
 
                     }
                 } else if (Input.GetKeyDown(KeyCode.D))
@@ -239,7 +239,7 @@ public class BattleManager : MonoBehaviour
                     if (playerHasArmyRespect)
                     {
                         // get help from a soldier
-                        Debug.Log("Even if you declined the boys potential help, a soldier came to your rescue");
+                        Debug.Log("Even if you declined the boy's potential help, a soldier came to your rescue");
                         childWildcard.SetActive(false);
                         soldierWildcardOutcome.SetActive(true);
                         StartCoroutine(LoadBoyScene());
@@ -251,7 +251,7 @@ public class BattleManager : MonoBehaviour
                         Debug.Log("Nobody helps you, Good luck");
                         gameOverScreen.SetActive(true);
                         childWildcard.SetActive(false);
-                        gameOverTextHint.text = "The prince gave his life for the child. The army was far to weak to stop the shadows of time.";
+                        gameOverTextHint.text = "The prince gave his life for the child. The army was far too weak to stop the shadows of time.";
 
                     }
                 }
