@@ -4,31 +4,58 @@ using UnityEngine.UI;
 
 public class SoundSettings : MonoBehaviour
 {
-    [Header("Audio Settings")]
-    // Reference to your AudioMixer (assign in Inspector)
-    public AudioMixer audioMixer;
+    [Header("Audio Mixer")]
+    public AudioMixer audioMixer;  // Drag your AudioMixer here
 
-    // Reference to the slider controlling the master volume (assign in Inspector)
+    [Header("Volume Sliders")]
     public Slider masterVolumeSlider;
+    public Slider voiceVolumeSlider;
+    public Slider soundEffectsSlider;
 
     private void Start()
     {
-        // Optionally, initialize the slider value with a saved preference.
-        // For example, get from PlayerPrefs if you have stored a previous volume.
-        float savedVolume = PlayerPrefs.GetFloat("MasterVolume", 0.75f);
-        masterVolumeSlider.value = savedVolume;
-        SetMasterVolume(savedVolume);
+        // Load saved volumes or use defaults (0.75f = 75% volume).
+        float savedMasterVol = PlayerPrefs.GetFloat("MasterVolume", 0.75f);
+        float savedVoiceVol = PlayerPrefs.GetFloat("VoiceVolume", 0.75f);
+        float savedSFXVol = PlayerPrefs.GetFloat("SFXVolume", 0.75f);
+
+        // Set slider values
+        masterVolumeSlider.value = savedMasterVol;
+        voiceVolumeSlider.value = savedVoiceVol;
+        soundEffectsSlider.value = savedSFXVol;
+
+        // Apply volumes to the AudioMixer
+        SetMasterVolume(savedMasterVol);
+        SetVoiceVolume(savedVoiceVol);
+        SetSFXVolume(savedSFXVol);
     }
 
-    // This method is called when the slider value changes.
-    // Attach this to the slider's OnValueChanged event.
-    public void SetMasterVolume(float sliderValue)
+    // Called by the Master Volume slider's OnValueChanged event
+    public void SetMasterVolume(float value)
     {
-        // Convert slider value (range 0 to 1) to decibels.
-        // If the slider value is 0, set a minimum decibel value (e.g., -80 dB)
-        float dB = sliderValue > 0 ? Mathf.Log10(sliderValue) * 20 : -80f;
+        // Convert [0,1] slider value to decibels
+        float dB = (value > 0) ? Mathf.Log10(value) * 20f : -80f;
         audioMixer.SetFloat("MasterVolume", dB);
+        // Save
+        PlayerPrefs.SetFloat("MasterVolume", value);
+        PlayerPrefs.Save();
+    }
 
-        PlayerPrefs.SetFloat("MasterVolume", sliderValue);
+    // Called by the Voice Volume slider's OnValueChanged event
+    public void SetVoiceVolume(float value)
+    {
+        float dB = (value > 0) ? Mathf.Log10(value) * 20f : -80f;
+        audioMixer.SetFloat("VoiceVolume", dB);
+        PlayerPrefs.SetFloat("VoiceVolume", value);
+        PlayerPrefs.Save();
+    }
+
+    // Called by the SFX Volume slider's OnValueChanged event
+    public void SetSFXVolume(float value)
+    {
+        float dB = (value > 0) ? Mathf.Log10(value) * 20f : -80f;
+        audioMixer.SetFloat("SFXVolume", dB);
+        PlayerPrefs.SetFloat("SFXVolume", value);
+        PlayerPrefs.Save();
     }
 }
