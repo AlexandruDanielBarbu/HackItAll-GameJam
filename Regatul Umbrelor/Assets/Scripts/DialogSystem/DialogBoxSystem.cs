@@ -1,84 +1,44 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogBoxSystem : MonoBehaviour
 {
-    [SerializeField] private float choiceTimer = 10f;
-    private float timer;
+    [Header("Speakers' text")]
     [SerializeField] TMP_Text playerText;
     [SerializeField] TMP_Text npcText;
 
-    
+    [Header("Dialogue Data")]
     [SerializeField] DialogDataSO currentDialog;
-    private int dialogLineIndex;
-    public void StartDialog(DialogDataSO dialog)
-    {
-        //currentDialog = dialog;
-        dialogLineIndex = 0;
-        //ShowNextLine();
-    }
 
-    //void ShowNextLine()
-    //{
-    //    var line = currentDialog.lines[dialogLineIndex];
+    [Header("Choice Timer")]
+    [SerializeField] private float choiceTimer = 10f;
+                     private float timer;
+    
+    [SerializeField] TMP_Text countdown;
 
-    //    if (line.choices != null && line.choices.Count > 0)
-    //    {
-    //        ShowChoices(line.choices);
-    //    }
-    //    else
-    //    {
-    //        DisplayLine(line);
-    //        dialogLineIndex++;
-    //    }
-    //}
-
-    //private void ExitDialog()
-    //{
-    //    dialogLineIndex = 0;
-    //    DialogInit();
-    //    gameObject.SetActive(false);
-    //}
-
-    //// function is called from another script that feeds the data to this script
-    //public void DialogSystem(Lines[] dialogLinesPO)
-    //{
-    //    DialogInit();
-    //    while (dialogLineIndex < dialogLines.Length)
-    //    {
-    //        DialogUpdate(dialogLinesPO);
-    //    }
-    //    ExitDialog();
-    //}
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-    //    //DialogSystem(dialogLines);
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-
-    //}
-
-    bool isTalking = true;
+    [Header("Choice Object")]
+    [SerializeField] GameObject choicesPanel;
     [SerializeField] TMP_Text option1_choice;
-    [SerializeField] TMP_Text option2_choice;
-
     [SerializeField] Button option1_choice_button;
+    [SerializeField] TMP_Text option2_choice;
     [SerializeField] Button option2_choice_button;
 
-    [SerializeField] TMP_Text countdown;
+
+    bool startTimer = false;
+    bool isTalking = true;
+    private int dialogLineIndex;
+
     public void SetDialog(DialogDataSO dialog, int index = 0)
     {
         dialogLineIndex = 0;
         currentDialog = dialog;
+        choicesPanel.SetActive(false);
     }
-    bool startTimer = false;
     private void Update()
     {
         if (startTimer)
@@ -95,55 +55,66 @@ public class DialogBoxSystem : MonoBehaviour
 
         if (isTalking && Input.GetKeyDown(KeyCode.Mouse0))
         {
-            DialogLine currentLine = currentDialog.lines[dialogLineIndex];
-
-            if (currentLine.speaker == DialogLine.Speaker.Player)
+            if (dialogLineIndex < currentDialog.lines.Count)
             {
-                playerText.text = currentLine.text;
-                npcText.text = string.Empty;
-            }
-            else
-            {
-                npcText.text = currentLine.text;
-                playerText.text = string.Empty;
-            }
+                DialogLine currentLine = currentDialog.lines[dialogLineIndex];
 
-            if (currentLine.choices.Count > 0 &&
-                currentLine.speaker == DialogLine.Speaker.NPC) 
-            {
-                DialogChoice choice01 = currentLine.choices[0];
-                DialogChoice choice02 = currentLine.choices[1];
-
-                option1_choice.text = choice01.choiceText;
-                option2_choice.text = choice02.choiceText;
-
-                startTimer = true;
-                option1_choice_button.onClick.AddListener(() =>
+                if (currentLine.speaker == DialogLine.Speaker.Player)
                 {
-                    SetDialog(choice01.nextDialog);
-                    startTimer = false;
-
-                    Notification.Instance.AddNotifications(choice01.nerf);
-                    Notification.Instance.AddNotifications(choice01.buff);
-                    StartCoroutine(Notification.Instance.DisplayNotification());
-
-                });
-
-                option2_choice_button.onClick.AddListener(() =>
+                    playerText.text = currentLine.text;
+                    npcText.text = string.Empty;
+                }
+                else
                 {
-                    SetDialog(choice02.nextDialog);
-                    startTimer = false;
-                   
-                    Notification.Instance.AddNotifications(choice02.buff);
-                    Notification.Instance.AddNotifications(choice02.nerf);
-                    StartCoroutine(Notification.Instance.DisplayNotification());
+                    npcText.text = currentLine.text;
+                    playerText.text = string.Empty;
+                }
 
-                });
+                    if (currentLine.choices.Count > 0 &&
+                        currentLine.speaker == DialogLine.Speaker.NPC)
+                    {
+                        DialogChoice choice01 = currentLine.choices[0];
+                        DialogChoice choice02 = currentLine.choices[1];
+
+                        option1_choice.text = choice01.choiceText;
+                        option2_choice.text = choice02.choiceText;
+
+                        startTimer = true;
+
+                        choicesPanel.SetActive(true);
+                        option1_choice_button.onClick.AddListener(() =>
+                        {
+                            Decisions.savedSchool = true;
+
+                            SetDialog(choice01.nextDialog);
+                            startTimer = false;
+
+                            Notification.Instance.AddNotifications(choice01.nerf);
+                            Notification.Instance.AddNotifications(choice01.buff);
+                            StartCoroutine(Notification.Instance.DisplayNotification());
+
+                        });
+
+                        option2_choice_button.onClick.AddListener(() =>
+                        {
+                            Decisions.savedSchool = false;
+                            SetDialog(choice02.nextDialog);
+                            startTimer = false;
+
+                            Notification.Instance.AddNotifications(choice02.buff);
+                            Notification.Instance.AddNotifications(choice02.nerf);
+                            StartCoroutine(Notification.Instance.DisplayNotification());
+
+                        });
+                    }
+                    else
+                    {
+                        dialogLineIndex++;
+                    }
             } else
             {
-                dialogLineIndex++;
+                Debug.Log("MA-TA");
             }
-
         }
     }
 }

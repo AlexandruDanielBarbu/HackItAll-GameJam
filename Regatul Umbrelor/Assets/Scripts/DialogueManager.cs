@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 public class DialogueManager : MonoBehaviour
 {
+    //[Header("Player Reference")]
+    //[SerializeField] GameObject playerObject;
+
     [Header("Dialogue Data")]
     [Tooltip("Insert your dialogue lines here (in order).")]
     public List<DialogueLine> dialogueLines = new List<DialogueLine>();
