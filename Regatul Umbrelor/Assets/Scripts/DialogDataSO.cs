@@ -21,5 +21,7 @@ public class DialogLine
 public class DialogChoice
 {
     public string choiceText;
+    public string buff;
+    public string nerf;
     public DialogDataSO nextDialog; // reference to another dialog asset
 }
