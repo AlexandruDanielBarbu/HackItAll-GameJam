@@ -8,13 +8,13 @@ public class PlayerMovement : MonoBehaviour
     private bool facingRight = true;
     private float gravityScale = 3f;
     private float jumpForce = 12f;
+    private bool grounded;
     [SerializeField] private float moveSpeed = 8f;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Animator animator;
     [SerializeField] private bool animationsEnabled = true;
-    private bool isRunning;
 
 
     void Start()
@@ -25,11 +25,12 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
-        bool grounded = IsGrounded();
+        grounded = IsGrounded();
 
         if (animationsEnabled)
         {
-            if (Input.GetButtonDown("Jump") && grounded && animationsEnabled)
+            Debug.Log("enabled");
+            if (Input.GetButtonDown("Jump") && grounded)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
@@ -41,11 +42,11 @@ public class PlayerMovement : MonoBehaviour
 
             animator.SetBool("IsRunning", grounded && (rb.velocity.x != 0));
 
-            if (rb.velocity.y > 0)  // jump
+            if (rb.velocity.y > 0)
             {
                 animator.SetBool("IsJumping", true);
             }
-            else if (grounded) // on ground
+            else if (grounded)
             {
                 animator.SetBool("IsJumping", false);
             }
