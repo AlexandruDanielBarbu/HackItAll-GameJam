@@ -40,8 +40,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 960690787022144796}
-  - component: {fileID: 3484666293024798541}
-  - component: {fileID: 5263715709150416724}
+  - component: {fileID: 852457669472824928}
+  - component: {fileID: -6862280956475857548}
   - component: {fileID: 4768626732747454696}
   - component: {fileID: 3259816162538994715}
   - component: {fileID: 9200984787313545548}
@@ -68,7 +68,7 @@ Transform:
   - {fileID: 1991978638739197581}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &3484666293024798541
+--- !u!212 &852457669472824928
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +108,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: -2044129159, guid: ea40c04716d779f41a3fba0333745ec5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -120,7 +120,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &5263715709150416724
+--- !u!95 &-6862280956475857548
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -225,9 +225,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e42ea4f258d4a19489e7f68ab73c7d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 8
   rb: {fileID: 4768626732747454696}
   groundCheck: {fileID: 1991978638739197581}
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  animator: {fileID: 5263715709150416724}
+  animator: {fileID: -6862280956475857548}
+  animationsEnabled: 1
