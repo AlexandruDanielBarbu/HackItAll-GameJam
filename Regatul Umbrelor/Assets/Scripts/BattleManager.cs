@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
@@ -152,8 +153,8 @@ public class BattleManager : MonoBehaviour
     float enemyTimer = 5f;
     float timer = 0f;
 
-    private bool playerHasPeopleRespect = false;
-    private bool playerHasArmyRespect= true;
+    private bool playerHasPeopleRespect = Decisions.savedSchool;
+    private bool playerHasArmyRespect= !Decisions.savedSchool;
 
     // Player sliders
     [SerializeField] private Slider playerHealthSlider;
@@ -177,7 +178,17 @@ public class BattleManager : MonoBehaviour
     {
         playerHasArmyRespect = false;
     }
-    
+
+    IEnumerator LoadBoyScene()
+    {
+        // Wait for 2 seconds
+        yield return new WaitForSeconds(2f);
+
+        // Now run your code
+        Debug.Log("2 seconds have passed. Running the rest of the code...");
+        SceneManager.LoadScene("AfterBattle01");
+        // Your code here
+    }
     private void UpdateSlideBars()
     {
         playerHealthSlider.value = playerEntity.GetHp();
@@ -210,6 +221,7 @@ public class BattleManager : MonoBehaviour
                         // Load next scene
                         Debug.Log("Player was helped!");
                         childWildcardOutcome.SetActive(true);
+                        StartCoroutine(LoadBoyScene());
                     }
                     else
                     {
@@ -230,7 +242,10 @@ public class BattleManager : MonoBehaviour
                         Debug.Log("Even if you declined the boys potential help, a soldier came to your rescue");
                         childWildcard.SetActive(false);
                         soldierWildcardOutcome.SetActive(true);
-                    } else
+                        StartCoroutine(LoadBoyScene());
+
+                    }
+                    else
                     {
                         // there is nobody to help you.
                         Debug.Log("Nobody helps you, Good luck");
