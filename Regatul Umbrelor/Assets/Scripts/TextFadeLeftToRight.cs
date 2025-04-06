@@ -6,6 +6,7 @@ public class TextFadeLeftToRight : MonoBehaviour
 {
     [SerializeField] private TMP_Text tmpText;
     [SerializeField] private float delayBetweenChars = 0.1f;
+    [SerializeField] private bool autoFadeOut = true;
 
     private void Start()
     {
@@ -35,10 +36,13 @@ public class TextFadeLeftToRight : MonoBehaviour
 
         yield return new WaitForSeconds(3 * delayBetweenChars);
 
-        // Fade out all at once
-        for (int i = 0; i < totalChars; i++)
+        if (autoFadeOut)
         {
-            StartCoroutine(FadeCharacter(i, 0f, 0.2f));
+            // Fade out all at once
+            for (int i = 0; i < totalChars; i++)
+            {
+                StartCoroutine(FadeCharacter(i, 0f, 0.2f));
+            }
         }
     }
 
