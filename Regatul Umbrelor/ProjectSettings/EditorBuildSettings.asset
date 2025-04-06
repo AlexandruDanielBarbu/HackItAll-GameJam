@@ -8,4 +8,24 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/StefanScenes/StefanDevScene.unity
+    guid: 1350cea5e971d8b489013dae8f30f3b4
+  - enabled: 1
+    path: Assets/Scenes/GeorgeScenes/Library01.unity
+    guid: 8ac3f6e47ab5625428595265110b90d6
+  - enabled: 1
+    path: Assets/Scenes/AlexScenes/CutSceneBegin.unity
+    guid: f6ab3f7c9bbfd5c46aba9429af5da077
+  - enabled: 1
+    path: Assets/Scenes/GeorgeScenes/ConferenceHall01.unity
+    guid: edb4d3e1dd5e98f46ab0fb3fc794093c
+  - enabled: 1
+    path: Assets/Scenes/GeorgeScenes/Hallway01.unity
+    guid: ba6adf26dca2f0448889735ce014de6d
+    path: Assets/Scenes/StefanScenes/Pause_Menu.unity
+    guid: 81028f88ef6e3724db67783524d8aa2a
+  - enabled: 1
+    path: Assets/Scenes/StefanScenes/Options_Global.unity
+    guid: fa30603c277deca4787e2ce52694ddeb
   m_configObjects: {}

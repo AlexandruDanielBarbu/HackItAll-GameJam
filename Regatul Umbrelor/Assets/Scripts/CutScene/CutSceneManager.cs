@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class CutSceneManager : MonoBehaviour
@@ -7,33 +8,38 @@ public class CutSceneManager : MonoBehaviour
     [SerializeField] int cutSceneId;
     [SerializeField] private GameObject fogOfWar;
     [SerializeField] private Vector3[] positions;
-    private int positionIndex = 0;
-    private void Awake()
+    private int positionIndex;
+    private bool atTheEnd;
+    private void Start()
     {
         fogOfWar.transform.position = positions[0];
-        positionIndex++;
+        positionIndex = 0;
+        atTheEnd = false;
     }
 
-    private bool atTheEnd = false;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && !atTheEnd)
         {
-            fogOfWar.transform.position = positions[positionIndex];
             positionIndex++;
+            Debug.Log(positionIndex);
 
-            positionIndex %= positions.Length;
+            fogOfWar.transform.position = positions[positionIndex];
 
-            if (positionIndex == 0)
-            {
+            if (positionIndex == 3) {
                 atTheEnd = true;
+                return;
             }
-        } else if (Input.GetKeyDown(KeyCode.Mouse0) && atTheEnd)
+        }
+        else if (Input.GetKeyDown(KeyCode.Mouse0) && atTheEnd)
         {
+            positionIndex = 0;
+            atTheEnd = false;
+
             if (cutSceneId == 0)
             {
-                /*Load gameplay scene*/
-                SceneLoading.Instance.TransitionToScene("AlexDevNextScene");
+                /*Load next scene*/
+                SceneManager.LoadScene("Hallway01");
             }
 
             if (cutSceneId == 1)

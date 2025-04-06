@@ -1,11 +1,14 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
     // Drag your panels from the Hierarchy into this array in the Inspector.
     public GameObject[] panels;
     public GameObject mainMenuPanel;
-
+    public GameObject mainCanvasBackground;
+    public GameObject defaultOptionsButton;
 
     // This method will activate the panel at the given index and disable all others.
     public void ShowPanel(int index)
@@ -16,6 +19,14 @@ public class MainMenuController : MonoBehaviour
             panels[i].SetActive(i == index);
         }
         mainMenuPanel.SetActive(false);
+
+        if (index == 1)
+        {
+            if (EventSystem.current != null && defaultOptionsButton != null)
+            {
+                EventSystem.current.SetSelectedGameObject(defaultOptionsButton);
+            }
+        }
     }
 
     public void QuitGame()
