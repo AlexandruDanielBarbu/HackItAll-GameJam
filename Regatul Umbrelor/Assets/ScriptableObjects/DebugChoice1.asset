@@ -14,8 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lines:
   - speaker: 0
-    text: Save the school
+    text: "If knowledge is our foundation, then let the harvest fail\u2014I\u2019d
+      rather feed minds than mouths, even if I don\u2019t yet know the cost."
     choices: []
   - speaker: 1
-    text: Good!
+    text: "You have spared the minds of the young, Sire... and in so doing, won the
+      hearts of your people. The school stands, proud and dry, its bell ringing hope
+      through soaked stone. Yet the fields\u2014abandoned to the time\u2014yield
+      little but dust and regret. Our men, idle, grow restless. And should war come...
+      we may find ourselves rich in wisdom, yet poor in strength."
     choices: []
