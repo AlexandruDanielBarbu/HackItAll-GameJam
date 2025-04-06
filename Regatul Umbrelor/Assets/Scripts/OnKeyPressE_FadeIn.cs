@@ -5,7 +5,6 @@ public class FadeIn_OnInteraction : MonoBehaviour
 {
     [SerializeField] private GameObject objectToFade;
     private float fadeDuration = 0.5f;
-    private bool isPlayerNearby = false;
     private SpriteRenderer objectRenderer;
     private Color originalColor;
 
@@ -24,7 +23,7 @@ public class FadeIn_OnInteraction : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayerNearby && !hasFadedIn && Input.GetKeyDown(KeyCode.E))
+        if (isPlayerNear && !hasFadedIn && Input.GetKeyDown(KeyCode.E))
         {
             StartCoroutine(FadeToOpaque());
             hasFadedIn = true;
@@ -35,7 +34,7 @@ public class FadeIn_OnInteraction : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerNearby = true;
+            isPlayerNear = true;
         }
     }
 
@@ -43,7 +42,7 @@ public class FadeIn_OnInteraction : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerNearby = false;
+            isPlayerNear = false;
         }
     }
 
