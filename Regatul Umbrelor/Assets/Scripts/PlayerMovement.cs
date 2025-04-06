@@ -29,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (animationsEnabled)
         {
-            Debug.Log("enabled");
             if (Input.GetButtonDown("Jump") && grounded)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
