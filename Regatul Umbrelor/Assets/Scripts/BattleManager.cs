@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
 {
+    [SerializeField] GameObject gameOverScreen;
     public class Entity
     {
         protected int hp = 100;
@@ -28,6 +30,17 @@ public class BattleManager : MonoBehaviour
             {
                 hp = 0;
                 isDead = true;
+            }
+
+            return isDead;
+        }
+
+        public bool SetHpPlus(int hp)
+        {
+            this.hp += hp;
+            if (hp > 0)
+            {
+                isDead = false;
             }
 
             return isDead;
@@ -71,6 +84,7 @@ public class BattleManager : MonoBehaviour
     {
         int age = 20;
         int finalAge;
+        
 
         public int GetAge()
         {
@@ -110,8 +124,18 @@ public class BattleManager : MonoBehaviour
     PlayerEntity playerEntity = new PlayerEntity();
     EnemyEntity enemyEntity = new EnemyEntity();
 
+    // Cards
+    [SerializeField] GameObject childWildcard;
+    [SerializeField] GameObject childWildcardOutcome;
+    [SerializeField] GameObject soldierWildcardOutcome;
+    [SerializeField] TMP_Text gameOverTextHint;
     private void Awake()
     {
+        childWildcard.SetActive(false);
+        childWildcardOutcome.SetActive(false);
+        soldierWildcardOutcome.SetActive(false);
+
+        gameOverScreen.SetActive(false);
         playerEntity.SetFinalAge(Random.Range(50, 100));
         Debug.Log(playerEntity.GetFinalAge());
         swordAtk.Damage = 20;
@@ -129,8 +153,8 @@ public class BattleManager : MonoBehaviour
     float enemyTimer = 5f;
     float timer = 0f;
 
-    private bool playerHasPeopleRespect = true;
-    private bool playerHasArmyRespect= true;
+    private bool playerHasPeopleRespect = Decisions.savedSchool;
+    private bool playerHasArmyRespect= !Decisions.savedSchool;
 
     // Player sliders
     [SerializeField] private Slider playerHealthSlider;
@@ -154,7 +178,17 @@ public class BattleManager : MonoBehaviour
     {
         playerHasArmyRespect = false;
     }
-    
+
+    IEnumerator LoadBoyScene()
+    {
+        // Wait for 2 seconds
+        yield return new WaitForSeconds(2f);
+
+        // Now run your code
+        Debug.Log("2 seconds have passed. Running the rest of the code...");
+        SceneManager.LoadScene("AfterBattle01");
+        // Your code here
+    }
     private void UpdateSlideBars()
     {
         playerHealthSlider.value = playerEntity.GetHp();
@@ -164,35 +198,62 @@ public class BattleManager : MonoBehaviour
         enemyHealthSlider.value = enemyEntity.GetHp();
     }
     int aiTurns = 3;
+    bool hadChosen = false;
     void Update()
     {
-        if (playerEntity.GetHp() <= 20 ||
-            enemyEntity.GetHp() <= 20 ||
+        if (playerEntity.GetHp() <= 30 ||
+            enemyEntity.GetHp() <= 30 ||
             playerEntity.GetRemainingLife() <= 20)
         {
             UpdateSlideBars();
-            Debug.Log("You can ask the kid for help.");
-            if (Input.GetKeyDown(KeyCode.A))
+
+            if (!hadChosen)
             {
-                // Asked the kid for help
-                if (playerHasPeopleRespect)
+                childWildcard.SetActive(true);
+                Debug.Log("You can ask the kid for help."); 
+                if (Input.GetKeyDown(KeyCode.A))
                 {
-                    // Player is helped
-                    // Load next scene
-                }
-                else
+                    hadChosen = true;
+                    // Asked the kid for help
+                    if (playerHasPeopleRespect)
+                    {
+                        // Player is helped
+                        // Load next scene
+                        Debug.Log("Player was helped!");
+                        childWildcardOutcome.SetActive(true);
+                        StartCoroutine(LoadBoyScene());
+                    }
+                    else
+                    {
+                        // Game over you die
+                        Debug.Log("Player was left for dead!");
+                        childWildcard.SetActive(false);
+                        gameOverScreen.SetActive(true);
+                        gameOverTextHint.text = "The child refused to help a king that does not value a school. Many were wounded and some died in the school flod...";
+
+                    }
+                } else if (Input.GetKeyDown(KeyCode.D))
                 {
-                    // Game over you die
-                }
-            } else if (Input.GetKeyDown(KeyCode.D))
-            {
-                // Don't use kid's help
-                if (playerHasArmyRespect)
-                {
-                    // get help from a soldier
-                } else
-                {
-                    // there is nobody to help you.
+                    hadChosen = true;
+                    // Don't use kid's help
+                    if (playerHasArmyRespect)
+                    {
+                        // get help from a soldier
+                        Debug.Log("Even if you declined the boys potential help, a soldier came to your rescue");
+                        childWildcard.SetActive(false);
+                        soldierWildcardOutcome.SetActive(true);
+                        StartCoroutine(LoadBoyScene());
+
+                    }
+                    else
+                    {
+                        // there is nobody to help you.
+                        Debug.Log("Nobody helps you, Good luck");
+                        gameOverScreen.SetActive(true);
+                        childWildcard.SetActive(false);
+                        gameOverTextHint.text = "The prince gave his life for the child. The army was far to weak to stop the shadows of time.";
+
+                    }
                 }
             }
 
@@ -269,7 +330,7 @@ public class BattleManager : MonoBehaviour
                 {
                     case 3:
                         playerEntity.SetHp(30);
-                        playerEntity.SetAge(10);
+                        //playerEntity.SetAge(10);
                     break;
                     
                     case 2:
@@ -278,12 +339,12 @@ public class BattleManager : MonoBehaviour
 
                     case 1:
                         playerEntity.SetHp(30);
-                        playerEntity.SetAge(10);
+                        //playerEntity.SetAge(10);
                     break;
 
                     case 0:
                         playerEntity.SetHp(30);
-                        playerEntity.SetAge(10);
+                        //playerEntity.SetAge(10);
                     break ;
                     
                     default:
