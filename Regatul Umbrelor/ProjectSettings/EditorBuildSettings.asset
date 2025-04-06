@@ -8,4 +8,37 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/StefanScenes/StefanDevScene.unity
+    guid: 1350cea5e971d8b489013dae8f30f3b4
+  - enabled: 1
+    path: Assets/Scenes/GeorgeScenes/Library01.unity
+    guid: 8ac3f6e47ab5625428595265110b90d6
+  - enabled: 1
+    path: Assets/Scenes/AlexScenes/CutSceneBegin.unity
+    guid: f6ab3f7c9bbfd5c46aba9429af5da077
+  - enabled: 1
+    path: Assets/Scenes/GeorgeScenes/ConferenceHall01.unity
+    guid: edb4d3e1dd5e98f46ab0fb3fc794093c
+  - enabled: 1
+    path: Assets/Scenes/GeorgeScenes/Hallway01.unity
+    guid: ba6adf26dca2f0448889735ce014de6d
+  - enabled: 0
+    path: Assets/Scenes/StefanScenes/Options_Global.unity
+    guid: fa30603c277deca4787e2ce52694ddeb
+  - enabled: 1
+    path: Assets/Scenes/GeorgeScenes/AfterBattle01.unity
+    guid: fb39353448481444db2689c0fd19a1b4
+  - enabled: 1
+    path: Assets/Scenes/GeorgeScenes/BeforeBattle01.unity
+    guid: e858535b67036c942a75923b177f57fe
+  - enabled: 1
+    path: Assets/Scenes/GeorgeScenes/TavernOutside.unity
+    guid: 7c7289dce71d7fd42b9eb7cd715dd263
+  - enabled: 1
+    path: Assets/Scenes/AlexScenes/CutSceneFinal.unity
+    guid: 505a8cdf63de7364babb4497e6d066c9
+  - enabled: 1
+    path: Assets/Scenes/AlexScenes/TurnBaseCombatScene.unity
+    guid: b88f42dfec615ca498393125ab4fcdbc
   m_configObjects: {}
