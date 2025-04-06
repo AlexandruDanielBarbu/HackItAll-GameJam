@@ -10,17 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7b9ab568ddd696449c6ca4daff3d50d, type: 3}
-  m_Name: DebugConversation
+  m_Name: ConferenceHall01Dialog
   m_EditorClassIdentifier: 
   lines:
   - speaker: 1
-    text: Sire we need your help!
+    text: "My liege... the hour presses upon us like a vice. The floodwaters rise
+      as if summoned by wrathful spirits, and the children\u2019s school\u2014our
+      beacon of learning\u2014stands but one storm away from ruin. Yet, our fields,
+      parched and brittle, yield to the sun\u2019s fury. Shall we shield the minds
+      of tomorrow, or gather what remains of today\u2019s labor?"
     choices: []
   - speaker: 1
-    text: The school is on fire
+    text: Milord, you are torn between two flames. One devours the harvest with haste
+      unseen, the other threatens the very walls where knowledge is sown. Choose
+      well, for both roads are paved with loss.
     choices: []
   - speaker: 1
-    text: The Crops are under snow
+    text: Would you have your people starve with full minds, or fed but blind to
+      the future? The crops wither, aye, but a school lost is a generation adrift.
     choices: []
   - speaker: 1
     text: What should we do?

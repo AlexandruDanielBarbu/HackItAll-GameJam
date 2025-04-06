@@ -14,8 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lines:
   - speaker: 0
-    text: Save the crops!
+    text: "Books can be rewritten, but withered fields can\u2019t be salvaged!"
     choices: []
   - speaker: 1
-    text: Good sire!
+    text: "The granaries are filled, my liege. The drought\u2019s cruelty, for now,
+      is beaten back by steel and sweat. Your choice kept hunger from our door. But
+      the school... it stands empty, its doors warped by the flood, its parchments
+      spoiled. The people whisper, their trust shaken. Bread they have\u2014but belief,
+      Sire... belief is harder won than wheat."
     choices: []
