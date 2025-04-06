@@ -54,7 +54,6 @@ public class PauseMenuController : MonoBehaviour
 
         pauseMenuUI.SetActive(true);
 
-        pauseMenuUI.SetActive(true);
         if (EventSystem.current != null && defaultPauseButton != null)
         {
             EventSystem.current.SetSelectedGameObject(defaultPauseButton);
