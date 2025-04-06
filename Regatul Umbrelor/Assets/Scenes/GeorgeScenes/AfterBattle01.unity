@@ -585,6 +585,7 @@ GameObject:
   - component: {fileID: 372299787}
   - component: {fileID: 372299786}
   - component: {fileID: 372299788}
+  - component: {fileID: 372299789}
   m_Layer: 5
   m_Name: good2
   m_TagString: Untagged
@@ -723,6 +724,20 @@ MonoBehaviour:
   tmpText: {fileID: 372299786}
   delayBetweenChars: 0.04
   autoFadeOut: 0
+--- !u!114 &372299789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372299784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d9bd04f0ce79e48bf2cfd84dd0ba8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToFade: {fileID: 1485129478}
+  interactionKey: 323
 --- !u!1 &374534960
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,6 +1040,7 @@ GameObject:
   - component: {fileID: 574312250}
   - component: {fileID: 574312249}
   - component: {fileID: 574312251}
+  - component: {fileID: 574312252}
   m_Layer: 5
   m_Name: bad2
   m_TagString: Untagged
@@ -1164,6 +1180,20 @@ MonoBehaviour:
   tmpText: {fileID: 574312249}
   delayBetweenChars: 0.04
   autoFadeOut: 0
+--- !u!114 &574312252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574312247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d9bd04f0ce79e48bf2cfd84dd0ba8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToFade: {fileID: 1485129478}
+  interactionKey: 323
 --- !u!1001 &627333826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1518,7 +1548,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1485129479
 Transform:
   m_ObjectHideFlags: 0
@@ -1576,7 +1606,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2147,8 +2177,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1567251640}
-  - {fileID: 1689895830}
   - {fileID: 627333826}
+  - {fileID: 1689895830}
   - {fileID: 413263002}
   - {fileID: 410016195}
   - {fileID: 901817488}

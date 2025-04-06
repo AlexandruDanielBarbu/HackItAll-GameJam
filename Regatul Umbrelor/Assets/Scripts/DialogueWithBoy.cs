@@ -26,22 +26,22 @@ public class DialogueWithBoy : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (currentLineIndex == 0)
+            currentLineIndex++;
+            if (currentLineIndex < 2)
             {
-                // Show line 2
-                SetLineVisibility(currentDecision, 0);
-                currentLineIndex = 1;
-            }
-            else if (currentLineIndex == 1)
-            {
-                SetLineVisibility(currentDecision, 1);
-                currentLineIndex = 2;
+                SetLineVisibility(currentDecision, currentLineIndex);
             }
             else
             {
-                SceneManager.LoadScene("Hallway01");
+                StartCoroutine(LoadSceneAfterDelay("Hallway01", 1f));
             }
         }
+    }
+
+    private IEnumerator LoadSceneAfterDelay(string sceneName, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(sceneName);
     }
 
     private void SetLineVisibility(GameObject decisionObj, int lineToShow)

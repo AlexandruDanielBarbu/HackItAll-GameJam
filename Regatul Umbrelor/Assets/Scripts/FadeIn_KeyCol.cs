@@ -1,9 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class FadeIn_OnInteraction : MonoBehaviour
+public class FadeIn_OnKeyCol : MonoBehaviour
 {
     [SerializeField] private GameObject objectToFade;
+    [SerializeField] private KeyCode interactionKey = KeyCode.E;
     private float fadeDuration = 0.5f;
     private SpriteRenderer objectRenderer;
     private Color originalColor;
@@ -23,7 +24,7 @@ public class FadeIn_OnInteraction : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayerNear && !hasFadedIn && Input.GetKeyDown(KeyCode.E))
+        if (isPlayerNear && !hasFadedIn && Input.GetKeyDown(interactionKey))
         {
             StartCoroutine(FadeToOpaque());
             hasFadedIn = true;
