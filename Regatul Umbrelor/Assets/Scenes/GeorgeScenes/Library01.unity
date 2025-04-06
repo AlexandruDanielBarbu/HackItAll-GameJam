@@ -274,7 +274,6 @@ GameObject:
   m_Component:
   - component: {fileID: 235345846}
   - component: {fileID: 235345845}
-  - component: {fileID: 235345847}
   m_Layer: 0
   m_Name: BlackScreen_fadeIn
   m_TagString: Untagged
@@ -349,19 +348,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 969478832}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &235345847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 235345844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b76cb6e849626464cbc830090bd7343e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToFade: {fileID: 0}
 --- !u!1 &371689866
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToFade: {fileID: 235345844}
+  interactionKey: 101
 --- !u!1 &731918354
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,7 +725,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -1760,5 +1747,6 @@ SceneRoots:
   - {fileID: 624288769}
   - {fileID: 133784673}
   - {fileID: 194648940}
-
   - {fileID: 1970265692}
+  - {fileID: 1700382717}
+  - {fileID: 1888746948}

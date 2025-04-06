@@ -33,7 +33,7 @@ public class DialogueWithBoy : MonoBehaviour
             }
             else
             {
-                StartCoroutine(LoadSceneAfterDelay("Hallway01", 1f));
+                StartCoroutine(LoadSceneAfterDelay("TavernOutside", 1f));
             }
         }
     }
